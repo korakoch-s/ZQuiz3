@@ -52,6 +52,8 @@
     <Compile Include="Choice.cs">
       <DependentUpon>ZQuizDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DependencyResolver.cs" />
+    <Compile Include="GenericRepository\GenericRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs">
       <DependentUpon>ZQuizDataModel.tt</DependentUpon>
@@ -63,6 +65,7 @@
       <DependentUpon>ZQuizDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="ZQuizDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
