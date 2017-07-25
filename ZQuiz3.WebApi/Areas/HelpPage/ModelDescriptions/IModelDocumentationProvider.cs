@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace ZQuiz3.WebApi.Areas.HelpPage.ModelDescriptions
+namespace ZQuiz.WebApi.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

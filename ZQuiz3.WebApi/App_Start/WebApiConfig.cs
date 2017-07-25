@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace ZQuiz3.WebApi
+namespace ZQuiz.WebApi
 {
     public static class WebApiConfig
     {

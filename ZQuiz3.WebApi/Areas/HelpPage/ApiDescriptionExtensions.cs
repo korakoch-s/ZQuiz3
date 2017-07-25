@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace ZQuiz3.WebApi.Areas.HelpPage
+namespace ZQuiz.WebApi.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

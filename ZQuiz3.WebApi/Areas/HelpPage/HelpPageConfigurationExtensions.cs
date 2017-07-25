@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using ZQuiz3.WebApi.Areas.HelpPage.ModelDescriptions;
-using ZQuiz3.WebApi.Areas.HelpPage.Models;
+using ZQuiz.WebApi.Areas.HelpPage.ModelDescriptions;
+using ZQuiz.WebApi.Areas.HelpPage.Models;
 
-namespace ZQuiz3.WebApi.Areas.HelpPage
+namespace ZQuiz.WebApi.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

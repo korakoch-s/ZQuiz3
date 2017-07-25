@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using ZQuiz3.WebApi.Areas.HelpPage.ModelDescriptions;
+using ZQuiz.WebApi.Areas.HelpPage.ModelDescriptions;
 
-namespace ZQuiz3.WebApi.Areas.HelpPage.Models
+namespace ZQuiz.WebApi.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

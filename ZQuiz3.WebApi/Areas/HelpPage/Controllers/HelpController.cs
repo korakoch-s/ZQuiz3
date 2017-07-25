@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using ZQuiz3.WebApi.Areas.HelpPage.ModelDescriptions;
-using ZQuiz3.WebApi.Areas.HelpPage.Models;
+using ZQuiz.WebApi.Areas.HelpPage.ModelDescriptions;
+using ZQuiz.WebApi.Areas.HelpPage.Models;
 
-namespace ZQuiz3.WebApi.Areas.HelpPage.Controllers
+namespace ZQuiz.WebApi.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

@@ -1,6 +1,6 @@
 using System;
 
-namespace ZQuiz3.WebApi.Areas.HelpPage.ModelDescriptions
+namespace ZQuiz.WebApi.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Use this attribute to change the name of the <see cref="ModelDescription"/> generated for a type.

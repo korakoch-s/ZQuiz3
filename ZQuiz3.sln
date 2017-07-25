@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZQuiz3.NgApp", "ZQuiz3.NgApp\ZQuiz3.NgApp.csproj", "{15628A62-EFC1-4C62-99F2-55F068BF02B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZQuiz.NgApp", "ZQuiz3.NgApp\ZQuiz.NgApp.csproj", "{15628A62-EFC1-4C62-99F2-55F068BF02B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZQuiz3.WebApi", "ZQuiz3.WebApi\ZQuiz3.WebApi.csproj", "{53942E55-C4A9-461C-89AF-1972CB4492D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZQuiz.WebApi", "ZQuiz3.WebApi\ZQuiz.WebApi.csproj", "{53942E55-C4A9-461C-89AF-1972CB4492D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZQuiz.BusinessEntities", "ZQuiz.BusinessEntities\ZQuiz.BusinessEntities.csproj", "{236FE9A6-7203-4F7E-9BB7-66B3E1C2468B}"
 EndProject
@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZQuiz.TestHelper", "ZQuiz.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZQuiz.Resolver", "ZQuiz.Resolver\ZQuiz.Resolver.csproj", "{028EE903-7850-4AAE-8E8E-4E33B64F9BF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZQuiz3.WebApi.Tests", "ZQuiz3.WebApi.Tests\ZQuiz3.WebApi.Tests.csproj", "{50340DFC-55AF-4B74-AA4B-8AE6A19F3630}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZQuiz.WebApi.Tests", "ZQuiz3.WebApi.Tests\ZQuiz.WebApi.Tests.csproj", "{50340DFC-55AF-4B74-AA4B-8AE6A19F3630}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZQuiz.BusinessServices.Tests", "ZQuiz.BusinessServices.Tests\ZQuiz.BusinessServices.Tests.csproj", "{9C5C7CE2-47E4-4493-B252-921A9B5F34A4}"
 EndProject

@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using ZQuiz3.WebApi.Areas.HelpPage.ModelDescriptions;
+using ZQuiz.WebApi.Areas.HelpPage.ModelDescriptions;
 
-namespace ZQuiz3.WebApi.Areas.HelpPage
+namespace ZQuiz.WebApi.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

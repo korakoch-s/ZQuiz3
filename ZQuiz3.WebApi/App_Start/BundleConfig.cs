@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace ZQuiz3.WebApi
+namespace ZQuiz.WebApi
 {
     public class BundleConfig
     {

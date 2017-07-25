@@ -56,9 +56,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ZQuiz3.WebApi\ZQuiz3.WebApi.csproj">
+    <ProjectReference Include="..\ZQuiz3.WebApi\ZQuiz.WebApi.csproj">
       <Project>{53942E55-C4A9-461C-89AF-1972CB4492D7}</Project>
-      <Name>ZQuiz3.WebApi</Name>
+      <Name>ZQuiz.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
