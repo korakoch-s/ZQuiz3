@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ZQuiz.BusinessEntities
 {
-    public class TesterQuestion
+    public class TesterQuestionEntity
     {
         public int TesterId { get; set; }
-        public Tester Tester { get; set; }
+        public TesterEntity Tester { get; set; }
         public int QuestionId { get; set; }
-        public Question Question { get; set; }
+        public QuestionEntity Question { get; set; }
         public int? AnsChoiceId { get; set; }
-        public Choice Choice { get; set; }
+        public ChoiceEntity Choice { get; set; }
     }
 }

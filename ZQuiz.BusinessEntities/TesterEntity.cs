@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZQuiz.BusinessEntities
 {
-    public class Tester
+    public class TesterEntity
     {
         public int TesterId { get; set; }
         public string Name { get; set; }
@@ -14,6 +14,6 @@ namespace ZQuiz.BusinessEntities
         public int Score { get; set; }
         public int TotalScore { get; set; }
 
-        public IEnumerable<TesterQuestion> TesterQuestions { get; set; }
+        public IEnumerable<TesterQuestionEntity> TesterQuestions { get; set; }
     }
 }

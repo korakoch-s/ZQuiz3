@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ZQuiz.BusinessEntities
 {
-    public class Question
+    public class ChoiceEntity
     {
-        public int QuestionId {get; set;}
+        public int ChoiceId { get; set; }
         public string Title { get; set; }
-        public int TotalScore { get; set; }
-        public IEnumerable<Choice> Choices { get; set; }
+        public int Score { get; set; }
+        public QuestionEntity Question { get; set; }
     }
 }
