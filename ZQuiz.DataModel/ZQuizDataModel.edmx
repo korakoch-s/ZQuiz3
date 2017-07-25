@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ZQuiz3.DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Choices">
+          <Key>
+            <PropertyRef Name="ChoiceId" />
+          </Key>
+          <Property Name="ChoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="TotalScore" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TesterQuestions">
+          <Key>
+            <PropertyRef Name="TesterId" />
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="TesterId" Type="int" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="AnsChoiceId" Type="int" />
+        </EntityType>
+        <EntityType Name="Testers">
+          <Key>
+            <PropertyRef Name="TesterId" />
+          </Key>
+          <Property Name="TesterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsCompleted" Type="bit" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="TotalScore" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Choices_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Choices" Type="Self.Choices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="Choices">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TesterQuestions_Choices">
+          <End Role="Choices" Type="Self.Choices" Multiplicity="0..1" />
+          <End Role="TesterQuestions" Type="Self.TesterQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Choices">
+              <PropertyRef Name="ChoiceId" />
+            </Principal>
+            <Dependent Role="TesterQuestions">
+              <PropertyRef Name="AnsChoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TesterQuestions_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="TesterQuestions" Type="Self.TesterQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="TesterQuestions">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TesterQuestions_Testers">
+          <End Role="Testers" Type="Self.Testers" Multiplicity="1" />
+          <End Role="TesterQuestions" Type="Self.TesterQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testers">
+              <PropertyRef Name="TesterId" />
+            </Principal>
+            <Dependent Role="TesterQuestions">
+              <PropertyRef Name="TesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZQuiz3DataModelStoreContainer">
+          <EntitySet Name="Choices" EntityType="Self.Choices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TesterQuestions" EntityType="Self.TesterQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Testers" EntityType="Self.Testers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Choices_Questions" Association="Self.FK_Choices_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Choices" EntitySet="Choices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TesterQuestions_Choices" Association="Self.FK_TesterQuestions_Choices">
+            <End Role="Choices" EntitySet="Choices" />
+            <End Role="TesterQuestions" EntitySet="TesterQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TesterQuestions_Questions" Association="Self.FK_TesterQuestions_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="TesterQuestions" EntitySet="TesterQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TesterQuestions_Testers" Association="Self.FK_TesterQuestions_Testers">
+            <End Role="Testers" EntitySet="Testers" />
+            <End Role="TesterQuestions" EntitySet="TesterQuestions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZQuiz3.DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Choice">
+          <Key>
+            <PropertyRef Name="ChoiceId" />
+          </Key>
+          <Property Name="ChoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Choices_Questions" FromRole="Choices" ToRole="Questions" />
+          <NavigationProperty Name="TesterQuestions" Relationship="Self.FK_TesterQuestions_Choices" FromRole="Choices" ToRole="TesterQuestions" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalScore" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Choices" Relationship="Self.FK_Choices_Questions" FromRole="Questions" ToRole="Choices" />
+          <NavigationProperty Name="TesterQuestions" Relationship="Self.FK_TesterQuestions_Questions" FromRole="Questions" ToRole="TesterQuestions" />
+        </EntityType>
+        <EntityType Name="TesterQuestion">
+          <Key>
+            <PropertyRef Name="TesterId" />
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="TesterId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="AnsChoiceId" Type="Int32" />
+          <NavigationProperty Name="Choice" Relationship="Self.FK_TesterQuestions_Choices" FromRole="TesterQuestions" ToRole="Choices" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_TesterQuestions_Questions" FromRole="TesterQuestions" ToRole="Questions" />
+          <NavigationProperty Name="Tester" Relationship="Self.FK_TesterQuestions_Testers" FromRole="TesterQuestions" ToRole="Testers" />
+        </EntityType>
+        <EntityType Name="Tester">
+          <Key>
+            <PropertyRef Name="TesterId" />
+          </Key>
+          <Property Name="TesterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="TotalScore" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TesterQuestions" Relationship="Self.FK_TesterQuestions_Testers" FromRole="Testers" ToRole="TesterQuestions" />
+        </EntityType>
+        <Association Name="FK_Choices_Questions">
+          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+          <End Role="Choices" Type="Self.Choice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="Choices">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TesterQuestions_Choices">
+          <End Role="Choices" Type="Self.Choice" Multiplicity="0..1" />
+          <End Role="TesterQuestions" Type="Self.TesterQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Choices">
+              <PropertyRef Name="ChoiceId" />
+            </Principal>
+            <Dependent Role="TesterQuestions">
+              <PropertyRef Name="AnsChoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TesterQuestions_Questions">
+          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+          <End Role="TesterQuestions" Type="Self.TesterQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="TesterQuestions">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TesterQuestions_Testers">
+          <End Role="Testers" Type="Self.Tester" Multiplicity="1" />
+          <End Role="TesterQuestions" Type="Self.TesterQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testers">
+              <PropertyRef Name="TesterId" />
+            </Principal>
+            <Dependent Role="TesterQuestions">
+              <PropertyRef Name="TesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZQuiz3DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Choices" EntityType="Self.Choice" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="TesterQuestions" EntityType="Self.TesterQuestion" />
+          <EntitySet Name="Testers" EntityType="Self.Tester" />
+          <AssociationSet Name="FK_Choices_Questions" Association="Self.FK_Choices_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Choices" EntitySet="Choices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TesterQuestions_Choices" Association="Self.FK_TesterQuestions_Choices">
+            <End Role="Choices" EntitySet="Choices" />
+            <End Role="TesterQuestions" EntitySet="TesterQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TesterQuestions_Questions" Association="Self.FK_TesterQuestions_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="TesterQuestions" EntitySet="TesterQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TesterQuestions_Testers" Association="Self.FK_TesterQuestions_Testers">
+            <End Role="Testers" EntitySet="Testers" />
+            <End Role="TesterQuestions" EntitySet="TesterQuestions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ZQuiz3DataModelStoreContainer" CdmEntityContainer="ZQuiz3DBEntities">
+          <EntitySetMapping Name="Choices">
+            <EntityTypeMapping TypeName="ZQuiz3.DataModel.Choice">
+              <MappingFragment StoreEntitySet="Choices">
+                <ScalarProperty Name="ChoiceId" ColumnName="ChoiceId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="ZQuiz3.DataModel.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TotalScore" ColumnName="TotalScore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TesterQuestions">
+            <EntityTypeMapping TypeName="ZQuiz3.DataModel.TesterQuestion">
+              <MappingFragment StoreEntitySet="TesterQuestions">
+                <ScalarProperty Name="TesterId" ColumnName="TesterId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="AnsChoiceId" ColumnName="AnsChoiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Testers">
+            <EntityTypeMapping TypeName="ZQuiz3.DataModel.Tester">
+              <MappingFragment StoreEntitySet="Testers">
+                <ScalarProperty Name="TesterId" ColumnName="TesterId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="TotalScore" ColumnName="TotalScore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
