@@ -16,7 +16,7 @@ namespace ZQuiz.DataModel
     public partial class ZQuiz3DBEntities : DbContext
     {
         public ZQuiz3DBEntities()
-            : base("name=ZQuiz3DBEntities")
+            : base("name=ZQuizDBModel")
         {
         }
     
