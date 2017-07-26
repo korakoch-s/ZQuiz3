@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http.Tracing;
-
+using ZQuiz3.WebApi.ErrorHelper;
 
 namespace ZQuiz3.WebApi.Helpers
 {
