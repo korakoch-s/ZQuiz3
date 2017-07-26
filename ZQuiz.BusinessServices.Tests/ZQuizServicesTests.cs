@@ -349,6 +349,9 @@ namespace ZQuiz.BusinessServices.Tests
                 CollectionAssert.AreEqual(
                     questionList.OrderBy(qt => qt, comparer),
                     _questions.OrderBy(qt => qt, comparer), comparer);
+            } else
+            {
+                Assert.Fail("GetAllQuestions must return collection of questions.");
             }
 
         }
@@ -375,7 +378,6 @@ namespace ZQuiz.BusinessServices.Tests
         {
             var tester = _testers.Find(t => t.TesterId == 2);
 
-            var maxTesterIdBeforeAdd = _testers.Max(t => t.TesterId);
             var returnTester = _zquizService.Register(tester.Name);
             Assert.IsTrue(TesterComparer.CompareModelAndEntity(tester, returnTester));
         }
@@ -492,8 +494,8 @@ namespace ZQuiz.BusinessServices.Tests
                 firstTester.TesterQuestions.Add(tq);
             }
 
-            Assert.AreEqual(40, expScore);
-            Assert.AreEqual(50, expTotalScore);
+            Assert.AreEqual(40, expScore);  //Depend on mockup data
+            Assert.AreEqual(50, expTotalScore); //Depend on mockup data
 
             var saveTester = this._zquizService.SubmitTest(ttEntity);
 

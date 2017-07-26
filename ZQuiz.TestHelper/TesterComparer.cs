@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,10 +40,15 @@ namespace ZQuiz.TestHelper
         public static bool CompareModelAndEntity(Tester testerModel, TesterEntity testerEntity)
         {
             int temp = 0;
+            Assert.AreEqual(testerModel.TesterId, testerEntity.TesterId, "TesterId");
             temp += testerModel.TesterId.CompareTo(testerEntity.TesterId);
+            Assert.AreEqual(testerModel.Name, testerEntity.Name, "Name");
             temp += testerModel.Name.CompareTo(testerEntity.Name);
+            Assert.AreEqual(testerModel.IsCompleted, testerEntity.IsCompleted, "IsCompleted");
             temp += testerModel.IsCompleted.CompareTo(testerEntity.IsCompleted);
+            Assert.AreEqual(testerModel.Score, testerEntity.Score, "Score");
             temp += testerModel.Score.CompareTo(testerEntity.Score);
+            Assert.AreEqual(testerModel.TotalScore, testerEntity.TotalScore, "TotalScore");
             temp += testerModel.TotalScore.CompareTo(testerEntity.TotalScore);
 
             if (temp == 0)

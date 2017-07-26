@@ -36,10 +36,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.1.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.1.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Moq, Version=4.7.99.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.7.99\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,6 +69,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +77,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ZQuiz.BusinessEntities\ZQuiz.BusinessEntities.csproj">
+      <Project>{236FE9A6-7203-4F7E-9BB7-66B3E1C2468B}</Project>
+      <Name>ZQuiz.BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZQuiz.BusinessServices\ZQuiz.BusinessServices.csproj">
+      <Project>{B18C035E-F39D-4520-8593-5484D1907ADD}</Project>
+      <Name>ZQuiz.BusinessServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZQuiz.DataModel\ZQuiz.DataModel.csproj">
+      <Project>{8082F4A8-838C-4070-AF52-CAB570EB8967}</Project>
+      <Name>ZQuiz.DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZQuiz.TestHelper\ZQuiz.TestHelper.csproj">
+      <Project>{F9B513E0-F516-4FEA-8377-CC3AB392B97A}</Project>
+      <Name>ZQuiz.TestHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ZQuiz3.WebApi\ZQuiz.WebApi.csproj">
       <Project>{53942E55-C4A9-461C-89AF-1972CB4492D7}</Project>
       <Name>ZQuiz.WebApi</Name>
