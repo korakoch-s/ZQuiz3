@@ -5,7 +5,7 @@ using System.Net;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace ZQuiz3.WebApi.ErrorHelper
+namespace ZQuiz.WebApi.ErrorHelper
 {
     /// <summary>
     /// Api Data Exception

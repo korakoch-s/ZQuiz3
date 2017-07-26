@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace ZQuiz3.WebApi.Helpers
+namespace ZQuiz.WebApi.Helpers
 {
     #region Status Object Class
     /// <summary>

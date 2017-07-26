@@ -6,9 +6,9 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http.Tracing;
-using ZQuiz3.WebApi.ErrorHelper;
+using ZQuiz.WebApi.ErrorHelper;
 
-namespace ZQuiz3.WebApi.Helpers
+namespace ZQuiz.WebApi.Helpers
 {
     /// <summary>
     /// Public class to log Error/info messages to the access log file

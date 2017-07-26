@@ -6,9 +6,9 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using System.Web.Http.Tracing;
-using ZQuiz3.WebApi.Helpers;
+using ZQuiz.WebApi.Helpers;
 
-namespace ZQuiz3.WebApi.ActionFilters
+namespace ZQuiz.WebApi.ActionFilters
 {
     public class LogginFilterAttribute : ActionFilterAttribute
     {

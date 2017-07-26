@@ -14,7 +14,6 @@ namespace ZQuiz.BusinessServices
         public void SetUp(IRegisterComponent registerComponent)
         {
             registerComponent.RegisterType<IZQuizService, ZQuizServices>();
-
         }
     }
 }

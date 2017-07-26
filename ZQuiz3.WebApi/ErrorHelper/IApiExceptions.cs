@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 
-namespace ZQuiz3.WebApi.ErrorHelper
+namespace ZQuiz.WebApi.ErrorHelper
 {
     /// <summary>
     /// IApiExceptions Interface

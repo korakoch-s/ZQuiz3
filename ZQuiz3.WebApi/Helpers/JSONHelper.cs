@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 
 
-namespace ZQuiz3.WebApi.Helpers
+namespace ZQuiz.WebApi.Helpers
 {
     public static class JSONHelper
     {
