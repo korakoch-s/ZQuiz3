@@ -82,13 +82,12 @@ namespace ZQuiz.BusinessServices
                     _unitOfWork.Save();
                 }
 
-                scope.Complete();
-
                 var testerEntity = Mapper.Map<Tester, TesterEntity>(tester);
                 if (testerEntity.IsCompleted)
                 {
                     testerEntity.Rank = this.CalculateRanking(testerEntity);
                 }
+                scope.Complete();
 
                 return testerEntity;
             }
@@ -130,9 +129,10 @@ namespace ZQuiz.BusinessServices
                     }
                     _unitOfWork.TesterRespository.Update(exTester);
                     _unitOfWork.Save();
-                    scope.Complete();
 
                     retTester = Mapper.Map<Tester, TesterEntity>(exTester);
+
+                    scope.Complete();
                 }
             }
 
@@ -153,17 +153,17 @@ namespace ZQuiz.BusinessServices
         private int CalculateRanking(TesterEntity tester)
         {
             var allTesters = _unitOfWork.TesterRespository.GetMany(tt => tt.IsCompleted == true).ToList();
-            allTesters.OrderByDescending(tt => tt.Score);
+            var testersDesc = allTesters.OrderByDescending(tt => tt.Score);
             int rank = 0;
-            foreach (var tt in allTesters)
+            foreach (var tt in testersDesc)
             {
                 rank++;
                 if (tt.TesterId == tester.TesterId)
                 {
-                    break;
+                    return rank;
                 }
             }
-            return rank;
+            return 0;
         }
 
         private void InitializeMapper_ModelToEntity()

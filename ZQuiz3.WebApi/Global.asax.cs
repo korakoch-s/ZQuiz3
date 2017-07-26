@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ZQuiz.WebApi.App_Start;
 
 namespace ZQuiz.WebApi
 {
@@ -33,7 +34,8 @@ namespace ZQuiz.WebApi
             var appXmlType = formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
             formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
 
-
+            //Add CORS Handler
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new CorsHandler());
         }
 
     }

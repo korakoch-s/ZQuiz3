@@ -22,7 +22,7 @@ export class TesterQuestion extends BaseModel {
     public Choice: Choice;
     public TesterId: number;
     public QuestionId: number;
-    public AnswerId: number;
+    public AnsChoiceId: number;
 }
 
 export const MockTester = (name: string): Tester => {

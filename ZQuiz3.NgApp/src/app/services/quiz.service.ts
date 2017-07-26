@@ -62,7 +62,7 @@ export class QuizService {
         //TODO: must implete real http service
 
         tester.TesterQuestions.forEach(tq => {
-            tq.AnswerId = tq.Choice.ChoiceId;
+            tq.AnsChoiceId = tq.Choice.ChoiceId;
         });
 
         return new Promise(resolve => {
@@ -82,7 +82,7 @@ export class QuizService {
         //TODO: must implete real http service
 
         tester.TesterQuestions.forEach(tq => {
-            tq.AnswerId = tq.Choice.ChoiceId;
+            tq.AnsChoiceId = tq.Choice.ChoiceId;
         });
 
         return new Promise<Tester>(resolve => {

@@ -61,10 +61,10 @@ export class QuizComponent implements OnInit {
                 this.tester.TesterQuestions.push(target);
             } else {
                 target.Question = qt;
-                if (target.AnswerId > 0) {
+                if (target.AnsChoiceId > 0) {
                     //already have answer
                     target.Choice = qt.Choices.find(ch => {
-                        return ch.ChoiceId == target.AnswerId;
+                        return ch.ChoiceId == target.AnsChoiceId;
                     });
                 } else {
                     target.Choice = new Choice();
