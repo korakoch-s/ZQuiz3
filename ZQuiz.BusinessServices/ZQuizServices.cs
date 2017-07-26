@@ -28,11 +28,6 @@ namespace ZQuiz.BusinessServices
             this.InitializeMapper_ModelToEntity();
         }
 
-        public int CalculateRanking(TesterEntity tester)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<QuestionEntity> GetAllQuestions()
         {
             var questions = _unitOfWork.QuestionRepository.GetAll().ToList();
@@ -86,9 +81,14 @@ namespace ZQuiz.BusinessServices
                     _unitOfWork.TesterRespository.Insert(tester);
                     _unitOfWork.Save();
                 }
+
                 scope.Complete();
 
                 var testerEntity = Mapper.Map<Tester, TesterEntity>(tester);
+                if (testerEntity.IsCompleted)
+                {
+                    testerEntity.Rank = this.CalculateRanking(testerEntity);
+                }
 
                 return testerEntity;
             }
@@ -96,12 +96,74 @@ namespace ZQuiz.BusinessServices
 
         public TesterEntity SaveTest(TesterEntity tester)
         {
-            throw new NotImplementedException();
+            var exTester = this._unitOfWork.TesterRespository.GetById(tester.TesterId);
+            var retTester = null as TesterEntity;
+
+            if (exTester != null)
+            {
+                using (var scope = new TransactionScope())
+                {
+                    exTester.Name = tester.Name;
+                    exTester.IsCompleted = tester.IsCompleted;
+
+                    exTester.Score = 0;
+                    exTester.TotalScore = 0;
+                    exTester.TesterQuestions.Clear();
+                    foreach (var tqe in tester.TesterQuestions)
+                    {
+                        exTester.TesterQuestions.Add(new TesterQuestion()
+                        {
+                            TesterId = exTester.TesterId,
+                            QuestionId = tqe.QuestionId,
+                            AnsChoiceId = tqe.AnsChoiceId
+                        });
+                        var quest = _unitOfWork.QuestionRepository.GetSingle(qt => qt.QuestionId == tqe.QuestionId);
+                        if (quest != null)
+                        {
+                            exTester.TotalScore += quest.TotalScore;
+                        }
+                        var choi = _unitOfWork.ChoiceRepository.GetSingle(ch => ch.ChoiceId == tqe.AnsChoiceId);
+                        if (choi != null)
+                        {
+                            exTester.Score += choi.Score;
+                        }
+                    }
+                    _unitOfWork.TesterRespository.Update(exTester);
+                    _unitOfWork.Save();
+                    scope.Complete();
+
+                    retTester = Mapper.Map<Tester, TesterEntity>(exTester);
+                }
+            }
+
+            return retTester;
         }
 
         public TesterEntity SubmitTest(TesterEntity tester)
         {
-            throw new NotImplementedException();
+            tester.IsCompleted = true;
+            var saveTester = this.SaveTest(tester);
+
+            //Calculate ranking before return
+            saveTester.Rank = this.CalculateRanking(saveTester);
+
+            return saveTester;
+        }
+
+        private int CalculateRanking(TesterEntity tester)
+        {
+            var allTesters = _unitOfWork.TesterRespository.GetMany(tt => tt.IsCompleted == true).ToList();
+            allTesters.OrderByDescending(tt => tt.Score);
+            int rank = 0;
+            foreach (var tt in allTesters)
+            {
+                rank++;
+                if (tt.TesterId == tester.TesterId)
+                {
+                    break;
+                }
+            }
+            return rank;
         }
 
         private void InitializeMapper_ModelToEntity()

@@ -13,6 +13,7 @@ namespace ZQuiz.BusinessEntities
         public bool IsCompleted { get; set; }
         public int Score { get; set; }
         public int TotalScore { get; set; }
+        public int Rank { get; set; }
 
         public ICollection<TesterQuestionEntity> TesterQuestions { get; set; }
     }

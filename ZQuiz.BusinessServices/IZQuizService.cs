@@ -17,6 +17,5 @@ namespace ZQuiz.BusinessServices
         TesterEntity LoadTesterByName(string name);
         TesterEntity SaveTest(TesterEntity tester);
         TesterEntity SubmitTest(TesterEntity tester);
-        int CalculateRanking(TesterEntity tester);
     }
 }

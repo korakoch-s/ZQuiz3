@@ -178,6 +178,12 @@ namespace ZQuiz.BusinessServices.Tests
                     return _testers.FirstOrDefault(expr);
                 });
 
+            mockRepo.Setup(t => t.GetMany(It.IsAny<Func<Tester, bool>>()))
+                .Returns((Func<Tester, bool> expr) =>
+                {
+                    return _testers.Where(expr);
+                });
+
             mockRepo.Setup(t => t.Insert((It.IsAny<Tester>())))
                 .Callback(new Action<Tester>(newTester =>
                     {
@@ -298,6 +304,12 @@ namespace ZQuiz.BusinessServices.Tests
                     return _testerQuestions.FirstOrDefault(expr);
                 });
 
+            mockRepo.Setup(t => t.GetMany(It.IsAny<Func<TesterQuestion, bool>>()))
+                .Returns((Func<TesterQuestion, bool> expr) =>
+                {
+                    return _testerQuestions.Where(expr).ToList();
+                });
+
             mockRepo.Setup(t => t.Insert((It.IsAny<TesterQuestion>())))
                 .Callback(new Action<TesterQuestion>(newTesterQuestion =>
                 {
@@ -369,12 +381,6 @@ namespace ZQuiz.BusinessServices.Tests
         }
 
         [Test()]
-        public void CalculateRankingTest()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Test()]
         public void LoadTesterByNameTest()
         {
             var tester = _testers.Find(t => t.TesterId == 3);
@@ -396,13 +402,120 @@ namespace ZQuiz.BusinessServices.Tests
         [Test()]
         public void SaveTestTest()
         {
-            throw new NotImplementedException();
+            var firstTester = _testers.First();
+            var ttEntity = new TesterEntity();
+
+            //mock modify test information
+
+            ttEntity.TesterId = firstTester.TesterId;
+            ttEntity.Name = firstTester.Name;
+
+            firstTester.TesterQuestions = new List<TesterQuestion>();
+            ttEntity.TesterQuestions = new List<TesterQuestionEntity>();
+            foreach (var qt in _questions)
+            {
+                var tqe = new TesterQuestionEntity()
+                {
+                    TesterId = firstTester.TesterId,
+                    QuestionId = qt.QuestionId,
+                    AnsChoiceId = qt.Choices.Last().ChoiceId,
+                };
+                ttEntity.TesterQuestions.Add(tqe);
+
+                var tq = new TesterQuestion()
+                {
+                    TesterId = firstTester.TesterId,
+                    QuestionId = qt.QuestionId,
+                    AnsChoiceId = qt.Choices.Last().ChoiceId,
+                };
+                firstTester.TesterQuestions.Add(tq);
+            }
+
+            var saveTester = this._zquizService.SaveTest(ttEntity);
+
+            Assert.AreEqual(firstTester.TesterId, saveTester.TesterId, "Same tester id");
+            Assert.AreEqual(firstTester.Name, saveTester.Name, "Same tester name");
+            Assert.AreEqual(firstTester.IsCompleted, saveTester.IsCompleted, "Same tester status");
+            Assert.AreEqual(firstTester.IsCompleted, saveTester.IsCompleted, "Same tester status");
+            Assert.AreEqual(firstTester.TesterQuestions.Count, saveTester.TesterQuestions.Count, "Same test item count");
+
+            firstTester.TesterQuestions.OrderBy(tq => tq.QuestionId);
+            saveTester.TesterQuestions.OrderBy(tq => tq.QuestionId);
+
+            int index = 0;
+            foreach (var ftq in firstTester.TesterQuestions)
+            {
+                var stq = saveTester.TesterQuestions.ElementAt(index);
+                Assert.AreEqual(ftq.QuestionId, stq.QuestionId, "Same question");
+                Assert.AreEqual(ftq.AnsChoiceId, stq.AnsChoiceId, "Same answer");
+                index++;
+            }
         }
 
         [Test()]
         public void SubmitTestTest()
         {
-            throw new NotImplementedException();
+            var firstTester = _testers.Last();
+            var ttEntity = new TesterEntity();
+
+            int expScore = 0;
+            int expTotalScore = 0;
+            int expRank = 1; //First submit must return 1
+
+            //mock modify test information
+
+            ttEntity.TesterId = firstTester.TesterId;
+            ttEntity.Name = firstTester.Name;
+
+            firstTester.TesterQuestions = new List<TesterQuestion>();
+            ttEntity.TesterQuestions = new List<TesterQuestionEntity>();
+            foreach (var qt in _questions)
+            {
+                var tqe = new TesterQuestionEntity()
+                {
+                    TesterId = firstTester.TesterId,
+                    QuestionId = qt.QuestionId,
+                    AnsChoiceId = qt.Choices.ElementAt(3).ChoiceId,
+                };
+                ttEntity.TesterQuestions.Add(tqe);
+
+                var tq = new TesterQuestion()
+                {
+                    TesterId = firstTester.TesterId,
+                    QuestionId = qt.QuestionId,
+                    AnsChoiceId = qt.Choices.ElementAt(3).ChoiceId,
+                };
+
+                expScore += qt.Choices.ElementAt(3).Score;
+                expTotalScore += qt.TotalScore;
+
+                firstTester.TesterQuestions.Add(tq);
+            }
+
+            Assert.AreEqual(40, expScore);
+            Assert.AreEqual(50, expTotalScore);
+
+            var saveTester = this._zquizService.SubmitTest(ttEntity);
+
+            Assert.AreEqual(firstTester.TesterId, saveTester.TesterId, "Same tester id");
+            Assert.AreEqual(firstTester.Name, saveTester.Name, "Same tester name");
+            Assert.AreEqual(firstTester.TesterQuestions.Count, saveTester.TesterQuestions.Count, "Same test item count");
+
+            firstTester.TesterQuestions.OrderBy(tq => tq.QuestionId);
+            saveTester.TesterQuestions.OrderBy(tq => tq.QuestionId);
+
+            int index = 0;
+            foreach (var ftq in firstTester.TesterQuestions)
+            {
+                var stq = saveTester.TesterQuestions.ElementAt(index);
+                Assert.AreEqual(ftq.QuestionId, stq.QuestionId, "Same question");
+                Assert.AreEqual(ftq.AnsChoiceId, stq.AnsChoiceId, "Same answer");
+                index++;
+            }
+
+            Assert.AreEqual(expScore, saveTester.Score, "Tester Score");
+            Assert.AreEqual(expTotalScore, saveTester.TotalScore, "Total Score");
+            Assert.AreEqual(expRank, saveTester.Rank, "Rank");
         }
 
         /// <summary>
