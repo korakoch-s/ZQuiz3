@@ -55,7 +55,10 @@ namespace ZQuiz.TestHelper
                 var tester = new Tester()
                 {
                     Name = "Tester " + i,
-                    IsCompleted = false
+                    IsCompleted = false,
+                    Score = 0,
+                    TotalScore = 0,
+                    TesterQuestions = new List<TesterQuestion>()
                 };
                 testers.Add(tester);
             }

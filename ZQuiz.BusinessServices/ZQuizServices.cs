@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using ZQuiz.BusinessEntities;
 using ZQuiz.DataModel;
 using ZQuiz.DataModel.UnitOfWork;
@@ -36,11 +37,7 @@ namespace ZQuiz.BusinessServices
             var questions = _unitOfWork.QuestionRepository.GetAll().ToList();
             if (questions.Any())
             {
-                Mapper.Initialize(cfg =>
-                {
-                    cfg.CreateMap<Question, QuestionEntity>();
-                    cfg.CreateMap<Choice, ChoiceEntity>();
-                });
+                this.InitializeMapper_ModelToEntity();
                 var questionModel = Mapper.Map<List<Question>, List<QuestionEntity>>(questions);
                 return questionModel;
             }
@@ -58,9 +55,36 @@ namespace ZQuiz.BusinessServices
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Register new tester by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public TesterEntity Register(string name)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                var tester = this._unitOfWork.TesterRespository.GetSingle(t => t.Name == name);
+
+                if (tester == null)
+                {
+                    tester = new Tester
+                    {
+                        Name = name,
+                        IsCompleted = false,
+                        Score = 0,
+                        TotalScore = 0
+                    };
+                    _unitOfWork.TesterRespository.Insert(tester);
+                    _unitOfWork.Save();
+                }
+                scope.Complete();
+
+                this.InitializeMapper_ModelToEntity();
+                var testerEntity = Mapper.Map<Tester, TesterEntity>(tester);
+
+                return testerEntity;
+            }
         }
 
         public TesterEntity SaveTest(TesterEntity tester)
@@ -71,6 +95,17 @@ namespace ZQuiz.BusinessServices
         public TesterEntity SubmitTest(TesterEntity tester)
         {
             throw new NotImplementedException();
+        }
+
+        private void InitializeMapper_ModelToEntity()
+        {
+            Mapper.Initialize(cfg =>
+           {
+               cfg.CreateMap<Question, QuestionEntity>();
+               cfg.CreateMap<Choice, ChoiceEntity>();
+               cfg.CreateMap<Tester, TesterEntity>();
+               cfg.CreateMap<TesterQuestion, TesterQuestionEntity>();
+           });
         }
     }
 }

@@ -14,6 +14,6 @@ namespace ZQuiz.BusinessEntities
         public int Score { get; set; }
         public int TotalScore { get; set; }
 
-        public IEnumerable<TesterQuestionEntity> TesterQuestions { get; set; }
+        public ICollection<TesterQuestionEntity> TesterQuestions { get; set; }
     }
 }

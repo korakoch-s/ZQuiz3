@@ -17,7 +17,7 @@ namespace ZQuiz.BusinessServices.Tests
     /// ZQuiz services test
     /// </summary>
     [TestFixture()]
-    public class ZQuizServicesTests
+    public class ZQuizServicesTests_Questions
     {
         private IZQuizService _zquizService;
         private IUnitOfWork _unitOfWork;
@@ -28,8 +28,17 @@ namespace ZQuiz.BusinessServices.Tests
         /// <summary>
         /// Initial setup for tests
         /// </summary>
-        [TestFixtureSetUp]
+        [TestFixtureSetUp()]
         public void Setup()
+        {
+            _questions = SetupQuestions();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [SetUp]
+        public void ReInitializeTest()
         {
             _questions = SetupQuestions();
             _dbEntities = new Mock<ZQuiz3DBEntities>().Object;
@@ -82,18 +91,6 @@ namespace ZQuiz.BusinessServices.Tests
             return mockRepo.Object;
         }
 
-        [Test()]
-        public void RegisterTest()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Test()]
-        public void CalculateRankingTest()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Service should return all questions
         /// </summary>
@@ -117,30 +114,6 @@ namespace ZQuiz.BusinessServices.Tests
                     _questions.OrderBy(qt => qt, comparer), comparer);
             }
 
-        }
-
-        [Test()]
-        public void LoadTesterByNameTest()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Test()]
-        public void RegisterTest1()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Test()]
-        public void SaveTestTest()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Test()]
-        public void SubmitTestTest()
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>

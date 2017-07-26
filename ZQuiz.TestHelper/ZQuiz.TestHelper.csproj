@@ -50,6 +50,10 @@
     <Compile Include="TesterComparer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ZQuiz.BusinessEntities\ZQuiz.BusinessEntities.csproj">
+      <Project>{236FE9A6-7203-4F7E-9BB7-66B3E1C2468B}</Project>
+      <Name>ZQuiz.BusinessEntities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ZQuiz.DataModel\ZQuiz.DataModel.csproj">
       <Project>{8082F4A8-838C-4070-AF52-CAB570EB8967}</Project>
       <Name>ZQuiz.DataModel</Name>

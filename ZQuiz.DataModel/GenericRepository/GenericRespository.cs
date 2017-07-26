@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -113,7 +114,7 @@ namespace ZQuiz.DataModel.GenericRepository
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
-        public TEntity Get(Func<TEntity, Boolean> where)
+        public virtual TEntity Get(Func<TEntity, Boolean> where)
         {
             return DbSet.Where(where).FirstOrDefault<TEntity>();
         }
@@ -167,7 +168,7 @@ namespace ZQuiz.DataModel.GenericRepository
         /// </summary>
         /// <param name="predicate">Criteria to match on</param>
         /// <returns>A single record that matches the specified criteria</returns>
-        public TEntity GetSingle(Func<TEntity, bool> predicate)
+        public virtual TEntity GetSingle(Func<TEntity, bool> predicate)
         {
             return DbSet.Single<TEntity>(predicate);
         }
@@ -177,7 +178,7 @@ namespace ZQuiz.DataModel.GenericRepository
         /// </summary>
         /// <param name="predicate">Criteria to match on</param>
         /// <returns>A single record containing the first record matching the specified criteria</returns>
-        public TEntity GetFirst(Func<TEntity, bool> predicate)
+        public virtual TEntity GetFirst(Func<TEntity, bool> predicate)
         {
             return DbSet.First<TEntity>(predicate);
         }
