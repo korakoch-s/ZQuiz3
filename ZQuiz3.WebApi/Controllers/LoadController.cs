@@ -9,30 +9,31 @@ using ZQuiz.BusinessServices;
 namespace ZQuiz.WebApi.Controllers
 {
     /// <summary>
-    /// Register new tester session
+    /// Load existed tester information
     /// </summary>
-    public class RegisterController : ApiController
+    public class LoadController : ApiController
     {
         private readonly IZQuizService _services;
 
-        public RegisterController(IZQuizService service)
+        public LoadController(IZQuizService service)
         {
             _services = service;
         }
 
         /// <summary>
-        /// Register new tester session
+        /// Load existed tester information
         /// </summary>
         /// <param name="name">Tester name</param>
         /// <returns></returns>
         // GET: api/register
         public IHttpActionResult Get(string name)
         {
-            var tester = this._services.Register(name);
-            if(tester != null)
+            var tester = this._services.LoadTesterByName(name);
+            if (tester != null)
             {
                 return Ok(tester);
-            }else
+            }
+            else
             {
                 return NotFound();
             }

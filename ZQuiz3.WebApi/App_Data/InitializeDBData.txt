@@ -1,0 +1,79 @@
+﻿USE [ZQuiz3DB]
+GO
+
+DELETE FROM TesterQuestions; 
+GO
+DELETE FROM Choices;
+DBCC CHECKIDENT ('Choices', RESEED, 0);
+GO
+DELETE FROM Questions;
+DBCC CHECKIDENT ('Questions', RESEED, 0);
+GO
+DELETE FROM Testers;
+DBCC CHECKIDENT ('Testers', RESEED, 0);
+GO
+
+DECLARE @iFlag INT
+DECLARE @jFlag INT
+SET @iFlag = 1
+WHILE (@iFlag <=5)
+BEGIN
+
+	INSERT INTO [dbo].[Questions]
+			   ([Title]
+			   ,[TotalScore])
+		 VALUES
+			   ('Question number ' + CAST(@iFlag AS VARCHAR)
+			   ,10)
+
+	SET @jFlag = 1
+	WHILE (@jFlag <= 5)
+	BEGIN
+		INSERT INTO [dbo].[Choices]
+				   ([Title]
+				   ,[Score]
+				   ,[QuestionId])
+			 VALUES
+				   ('Choice ' + CAST(@jFlag AS VARCHAR) + ' of question ' + CAST(@iFlag AS VARCHAR)
+				   ,@jFlag * 2
+				   ,@iFlag)
+		SET @jFlag = @jFlag + 1
+	END
+    SET @iFlag = @iFlag + 1
+END
+
+SET @jFlag = 1
+	WHILE (@jFlag <= 5)
+	BEGIN
+	INSERT INTO [dbo].[Testers]
+			   ([Name]
+			   ,[IsCompleted]
+			   ,[Score]
+			   ,[TotalScore])
+		 VALUES
+			   ('Tester' + CAST(@jFlag AS VARCHAR)
+			   ,0
+			   ,0
+			   ,0)
+			SET @jFlag = @jFlag + 1
+	END
+
+SET @iFlag = 1
+	WHILE (@iFlag <= 5)
+	BEGIN
+		SET @jFlag = 1
+		WHILE (@jFlag <= 5)
+		BEGIN
+		INSERT INTO [dbo].[TesterQuestions]
+				   ([TesterId]
+				   ,[QuestionId]
+				   ,[AnsChoiceId])
+			 VALUES
+				   (@iFlag
+				   ,@jFlag
+				   ,((@iFlag-1)*5)+@jFlag)
+			SET @jFlag = @jFlag + 1
+		END
+		SET @iFlag = @iFlag + 1
+	END
+GO

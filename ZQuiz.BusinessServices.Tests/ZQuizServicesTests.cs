@@ -358,7 +358,7 @@ namespace ZQuiz.BusinessServices.Tests
         {
             var newTester = new TesterEntity()
             {
-                Name = "New_Unit_Tester_Name",
+                Name = "New_Tester_Name",
                 IsCompleted = false,
                 Score = 0,
                 TotalScore = 0

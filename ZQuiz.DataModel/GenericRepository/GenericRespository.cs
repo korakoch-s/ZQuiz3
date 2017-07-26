@@ -170,7 +170,7 @@ namespace ZQuiz.DataModel.GenericRepository
         /// <returns>A single record that matches the specified criteria</returns>
         public virtual TEntity GetSingle(Func<TEntity, bool> predicate)
         {
-            return DbSet.Single<TEntity>(predicate);
+            return DbSet.SingleOrDefault<TEntity>(predicate);
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace ZQuiz.DataModel.GenericRepository
         /// <returns>A single record containing the first record matching the specified criteria</returns>
         public virtual TEntity GetFirst(Func<TEntity, bool> predicate)
         {
-            return DbSet.First<TEntity>(predicate);
+            return DbSet.FirstOrDefault<TEntity>(predicate);
         }
 
 
