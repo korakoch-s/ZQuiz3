@@ -1,0 +1,15 @@
+﻿<div class="container">
+  <h2>Quiz</h2>
+  <div *ngIf="tester">
+    <div *ngFor="let itm of tester.TesterQuestions; let i = index">
+      <app-quiz-item [question]="itm.Question" [itemNo]="i+1" 
+                     [(answer)]="itm.Choice"></app-quiz-item>
+    </div>
+    <br />
+    <div class="text-center">
+      <button class="btn btn-info" (click)="saveClick()">Save</button>
+      <button class="btn btn-primary" (click)="submitClick()">Submit</button>
+    </div>
+    <br />
+  </div>
+</div>

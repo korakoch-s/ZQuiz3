@@ -1,0 +1,24 @@
+﻿<div class="container">
+  <div class="jumbotron">
+    <h3>Z-Quiz Register</h3>
+  </div>
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="username">User Name</label>
+      <input class="form-control" type="text" placeholder="your name" 
+             [(ngModel)]="userName" id="username" name="username" (keyup.enter)="goClick(alertTemplate)" />
+      <button type="button" class="btn btn-primary" (click)="goClick(alertTemplate)">Go...</button>
+    </div>
+  </form>
+</div>
+<ng-template #alertTemplate>
+  <div class="modal-header bg-info">
+    <h4 class="modal-title pull-left">Warning</h4>
+    <button type="button" class="close pull-right" aria-label="close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Please input User Name before click "Go..." to contineue.
+  </div>
+</ng-template>
