@@ -25,6 +25,7 @@ namespace ZQuiz.BusinessServices
         public ZQuizServices(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            this.InitializeMapper_ModelToEntity();
         }
 
         public int CalculateRanking(TesterEntity tester)
@@ -37,7 +38,6 @@ namespace ZQuiz.BusinessServices
             var questions = _unitOfWork.QuestionRepository.GetAll().ToList();
             if (questions.Any())
             {
-                this.InitializeMapper_ModelToEntity();
                 var questionModel = Mapper.Map<List<Question>, List<QuestionEntity>>(questions);
                 return questionModel;
             }
@@ -52,7 +52,15 @@ namespace ZQuiz.BusinessServices
         /// <returns></returns>
         public TesterEntity LoadTesterByName(string name)
         {
-            throw new NotImplementedException();
+            var testerEntity = null as TesterEntity;
+            var tester = this._unitOfWork.TesterRespository.GetSingle(t => t.Name == name);
+            if (tester != null)
+            {
+                tester.TesterQuestions = this._unitOfWork.TesterQuestionRepository.GetMany(tq => tq.TesterId == tester.TesterId).ToList();
+                testerEntity = Mapper.Map<Tester, TesterEntity>(tester);
+            }
+
+            return testerEntity;
         }
 
         /// <summary>
@@ -80,7 +88,6 @@ namespace ZQuiz.BusinessServices
                 }
                 scope.Complete();
 
-                this.InitializeMapper_ModelToEntity();
                 var testerEntity = Mapper.Map<Tester, TesterEntity>(tester);
 
                 return testerEntity;
