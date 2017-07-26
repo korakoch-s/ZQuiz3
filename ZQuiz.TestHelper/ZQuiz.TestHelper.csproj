@@ -46,6 +46,7 @@
     <Compile Include="DataInitializer.cs" />
     <Compile Include="ObjectComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionComparer.cs" />
     <Compile Include="TesterComparer.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'c:\users\korakoch\documents\visual studio 2017\Projects\ZQuiz3\ZQuiz.DataModel\ZQuizDataModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Korakoch\documents\visual studio 2017\Projects\ZQuiz3\ZQuiz.DataModel\ZQuizDataModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

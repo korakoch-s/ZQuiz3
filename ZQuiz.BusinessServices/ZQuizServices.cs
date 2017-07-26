@@ -1,9 +1,11 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZQuiz.BusinessEntities;
+using ZQuiz.DataModel;
 using ZQuiz.DataModel.UnitOfWork;
 
 namespace ZQuiz.BusinessServices
@@ -31,7 +33,19 @@ namespace ZQuiz.BusinessServices
 
         public IEnumerable<QuestionEntity> GetAllQuestions()
         {
-            throw new NotImplementedException();
+            var questions = _unitOfWork.QuestionRepository.GetAll().ToList();
+            if (questions.Any())
+            {
+                Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<Question, QuestionEntity>();
+                    cfg.CreateMap<Choice, ChoiceEntity>();
+                });
+                var questionModel = Mapper.Map<List<Question>, List<QuestionEntity>>(questions);
+                return questionModel;
+            }
+
+            return null;
         }
 
         /// <summary>

@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="cec88565d8bc4aada714eb542c838add" Name="Diagram1">
-        <EntityTypeShape EntityType="ZQuiz3.DataModel.Choice" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZQuiz3.DataModel.Question" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZQuiz3.DataModel.Choice" Width="1.5" PointX="2.625" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZQuiz3.DataModel.Question" Width="1.5" PointX="2.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ZQuiz3.DataModel.TesterQuestion" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZQuiz3.DataModel.Tester" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZQuiz3.DataModel.Tester" Width="1.5" PointX="7.625" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="ZQuiz3.DataModel.FK_Choices_Questions" ManuallyRouted="false" />
         <AssociationConnector Association="ZQuiz3.DataModel.FK_TesterQuestions_Choices" ManuallyRouted="false" />
         <AssociationConnector Association="ZQuiz3.DataModel.FK_TesterQuestions_Questions" ManuallyRouted="false" />

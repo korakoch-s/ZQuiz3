@@ -36,6 +36,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.1.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.1.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <Reference Include="Moq, Version=4.7.99.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.7.99\lib\net45\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -57,9 +67,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ZQuiz.BusinessEntities\ZQuiz.BusinessEntities.csproj">
+      <Project>{236FE9A6-7203-4F7E-9BB7-66B3E1C2468B}</Project>
+      <Name>ZQuiz.BusinessEntities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ZQuiz.BusinessServices\ZQuiz.BusinessServices.csproj">
       <Project>{B18C035E-F39D-4520-8593-5484D1907ADD}</Project>
       <Name>ZQuiz.BusinessServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZQuiz.DataModel\ZQuiz.DataModel.csproj">
+      <Project>{8082F4A8-838C-4070-AF52-CAB570EB8967}</Project>
+      <Name>ZQuiz.DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZQuiz.TestHelper\ZQuiz.TestHelper.csproj">
+      <Project>{F9B513E0-F516-4FEA-8377-CC3AB392B97A}</Project>
+      <Name>ZQuiz.TestHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
