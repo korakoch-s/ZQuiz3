@@ -10,11 +10,17 @@ import { QuizService } from '../../services/quiz.service';
 })
 export class SummaryComponent implements OnInit {
     public tester: Tester;
+    public isWorking: boolean = false;
 
     constructor(private activeRoute: ActivatedRoute, private quizSvr: QuizService) {
+        this.isWorking = true;
         this.activeRoute.params.subscribe(params => {
             this.quizSvr.load(params['username']).then(tester => {
                 this.tester = tester;
+                this.isWorking = false;
+            }).catch(e => {
+                console.log('Some error: ' + JSON.stringify(e));
+                this.isWorking = false;
             });
         });
     }

@@ -16,17 +16,26 @@ export class QuizComponent implements OnInit {
     private isQtLoad: boolean = false;
     private isTesterLoad: boolean = false;
 
+    public isWorking: boolean = false;
+
     constructor(private router: Router, private activeRoute: ActivatedRoute,
         private quizSvr: QuizService) {
         //this.questions = MockQuestions();
+        this.isWorking = true;
         this.quizSvr.quiz().then((qs) => {
             this.questions = qs;
             this.isQtLoad = true;
+        }).catch(e => {
+            this.isQtLoad = true;
+            console.log('Some error: ' + JSON.stringify(e));
         });
         this.activeRoute.params.subscribe(params => {
             this.quizSvr.load(params['username']).then(tester => {
                 this.tester = tester;
                 this.isTesterLoad = true;
+            }).catch(e => {
+                this.isTesterLoad = true;
+                console.log('Some error: ' + JSON.stringify(e));
             });
         });
     }
@@ -37,6 +46,7 @@ export class QuizComponent implements OnInit {
             if (timeOutCount > 20 || (this.isQtLoad && this.isTesterLoad)) {
                 clearInterval(itid);
                 this.mapTesterQuestions();
+                this.isWorking = false;
             }
             timeOutCount++;
         }, 500);
@@ -57,7 +67,7 @@ export class QuizComponent implements OnInit {
                 target = new TesterQuestion();
                 target.QuestionId = qt.QuestionId;
                 target.Question = qt;
-                target.Choice = new Choice();
+                target.Choice = new Choice(qt.QuestionId);
                 this.tester.TesterQuestions.push(target);
             } else {
                 target.Question = qt;
@@ -67,7 +77,7 @@ export class QuizComponent implements OnInit {
                         return ch.ChoiceId == target.AnsChoiceId;
                     });
                 } else {
-                    target.Choice = new Choice();
+                    target.Choice = new Choice(qt.QuestionId);
                 }
             }
 
@@ -75,15 +85,26 @@ export class QuizComponent implements OnInit {
     }
 
     submitClick() {
+        this.isWorking = true;
         this.quizSvr.submit(this.tester).then(tester => {
-            console.log(JSON.stringify(this.tester));
             this.router.navigate(['/summary', this.tester.Name]);
+            this.isWorking = false;
+        }).catch(e => {
+            this.isQtLoad = true;
+            console.log('Some error: ' + JSON.stringify(e));
+            this.isWorking = false;
         });
     }
 
     saveClick() {
+        this.isWorking = true;
         this.quizSvr.save(this.tester).then(obj => {
             this.router.navigate(['/register']);
+            this.isWorking = false;
+        }).catch(e => {
+            this.isQtLoad = true;
+            console.log('Some error: ' + JSON.stringify(e));
+            this.isWorking = false;
         });
     }
 

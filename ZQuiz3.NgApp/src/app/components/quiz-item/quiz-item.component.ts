@@ -13,7 +13,11 @@ export class QuizItemComponent implements OnInit {
     @Input() answer: Choice;
     @Output() answerChange: EventEmitter<Choice> = new EventEmitter<Choice>();
 
-    constructor() { }
+    constructor() {
+        //if (this.answer == undefined) {
+        //    this.answer = new Choice(this.question.);
+        //}
+    }
 
     ngOnInit() {
     }

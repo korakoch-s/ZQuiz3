@@ -3,7 +3,7 @@
   <div *ngIf="question && question?.Choices" class="choice-group">
     <div class="radio" *ngFor="let ch of question.Choices">
       <label>
-        <input type="radio" [name]="'choiceOption' + question.QuestionId" [value]="ch.ChoiceId" 
+        <input type="radio" [name]="'choiceOption' + question.QuestionId" [value]="ch?.ChoiceId" 
                [(ngModel)]="answer.ChoiceId" (click)="choiceClick(ch)" />
         {{ch.Title}}
       </label>

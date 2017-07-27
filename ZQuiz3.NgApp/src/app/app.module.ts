@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { QuizItemComponent } from './components/quiz-item/quiz-item.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,7 @@ import { QuizItemComponent } from './components/quiz-item/quiz-item.component';
         HttpClientModule
     ],
     providers: [
-        { provide: 'API_URL', useValue: 'http://localhost:54263/api/'},
+        { provide: 'API_URL', useValue: environment.webApiBaseUrl },
         QuizService
     ],
     bootstrap: [AppComponent]

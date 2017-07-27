@@ -7,7 +7,7 @@
       <label for="username">User Name</label>
       <input class="form-control" type="text" placeholder="your name" 
              [(ngModel)]="userName" id="username" name="username" (keyup.enter)="goClick(alertTemplate)" />
-      <button type="button" class="btn btn-primary" (click)="goClick(alertTemplate)">Go...</button>
+      <button type="button" class="btn btn-primary" (click)="goClick(alertTemplate)" [disabled]="isWorking">Go...</button>
     </div>
   </form>
 </div>
@@ -22,3 +22,4 @@
     Please input User Name before click "Go..." to contineue.
   </div>
 </ng-template>
+<div id="loading" *ngIf="isWorking">Loading....</div>

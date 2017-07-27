@@ -18,11 +18,13 @@ export class QuizService {
 
     public register(name: string): Promise<Tester> {
         //TODO: must implete real http service
-        return new Promise<Tester>(resolve => {
+        return new Promise<Tester>((resolve, reject) => {
             this.http.get(`${this.apiUrl}register/${name}`)
                 .subscribe((obj: Tester) => {
                     this.currentTester = obj;
                     resolve(this.currentTester);
+                }, (err) => {
+                    reject(err);
                 });
         });
     }
@@ -30,12 +32,14 @@ export class QuizService {
     public load(name: string): Promise<Tester> {
         //TODO: must implete real http service
 
-        return new Promise<Tester>(resolve => {
+        return new Promise<Tester>((resolve, reject) => {
             if (!this.currentTester || this.currentTester.Name != name) {
                 this.http.get(`${this.apiUrl}register/${name}`)
                     .subscribe((obj: Tester) => {
                         this.currentTester = obj;
                         resolve(this.currentTester);
+                    }, (err) => {
+                        reject(err);
                     });
             } else {
                 resolve(this.currentTester);
@@ -45,17 +49,15 @@ export class QuizService {
     }
 
     public quiz(): Promise<Question[]> {
-        //TODO: must implete real http service
-        return new Promise<Question[]>(resolve => {
+        return new Promise<Question[]>((resolve, reject) => {
             this.http.get(`${this.apiUrl}quiz`)
                 .subscribe((obj: Question[]) => {
-                    //this.currentTester = new Tester();
-                    //this.currentTester.fillFromJson(obj);
                     resolve(obj);
+                }, (err) => {
+                    reject(err);
                 });
         });
 
-        //return MockQuestions();
     }
 
     public save(tester: Tester): Promise<any> {
@@ -65,54 +67,30 @@ export class QuizService {
             tq.AnsChoiceId = tq.Choice.ChoiceId;
         });
 
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             this.http.post(`${this.apiUrl}save`, tester)
                 .subscribe((obj: any) => {
-                    //this.currentTester = new Tester();
-                    //this.currentTester.fillFromJson(obj);
                     resolve(obj);
+                }, (err) => {
+                    reject(err);
                 });
         });
-
-        //this.currentTester = tester;
-        //return tester;
     }
 
     public submit(tester: Tester): Promise<Tester> {
-        //TODO: must implete real http service
 
         tester.TesterQuestions.forEach(tq => {
             tq.AnsChoiceId = tq.Choice.ChoiceId;
         });
 
-        return new Promise<Tester>(resolve => {
+        return new Promise<Tester>((resolve, reject) => {
             this.http.post(`${this.apiUrl}submit`, tester)
                 .subscribe((obj: Tester) => {
                     this.currentTester = obj;
                     resolve(this.currentTester);
+                }, (err) => {
+                    reject(err);
                 });
         });
-
-        //let score: number = 0;
-        //let total: number = 0;
-        //tester.TesterQuestions.forEach(itm => {
-        //    if (itm.Choice) {
-        //        score += itm.answer.score;
-        //    }
-        //    if (itm.question) {
-        //        total += Math.max.apply(Math, itm.question.choices.map(ch => {
-        //            return ch.score;
-        //        }));
-        //    }
-        //});
-
-        //tester.Score = 10;
-        //tester.TotalScore = 50;
-        //tester.Rank = 10;
-        //tester.IsCompleted = true;
-
-        //this.currentTester = tester;
-
-        //return tester;
     }
 }

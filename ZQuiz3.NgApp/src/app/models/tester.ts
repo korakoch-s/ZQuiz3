@@ -37,7 +37,7 @@ export const MockTester = (name: string): Tester => {
     questions.forEach(q => {
         let newTq = new TesterQuestion();
         newTq.Question = q;
-        newTq.Choice = new Choice();
+        newTq.Choice = new Choice(q.QuestionId);
         tester.TesterQuestions.push(newTq);
     })
     tester.TesterQuestions[0].Choice = questions[0].Choices[0];

@@ -11,6 +11,11 @@ export class Choice extends BaseModel {
     public ChoiceId: number;
     public Title: string;
     public QuestionId: number;
+
+    constructor(qid: number) {
+        super();
+        this.QuestionId = qid;
+    }
 }
 
 export const MockQuestions = () => {
@@ -22,8 +27,8 @@ export const MockQuestions = () => {
         q.QuestionId = i + 1;
         q.Title = 'Question of ' + q.QuestionId;
         q.Choices = [];
-        for (let j = 0; j < 5; j++, chId++) {
-            let ch = new Choice();
+        for (let j = 0; j < 5; j++ , chId++) {
+            let ch = new Choice(q.QuestionId);
             ch.ChoiceId = chId;
             ch.Title = 'Answer ' + chId + ' of question ' + q.QuestionId;
             q.Choices.push(ch);
