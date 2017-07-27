@@ -1,0 +1,170 @@
+﻿DELETE FROM TesterQuestions; 
+GO
+DELETE FROM Choices;
+DBCC CHECKIDENT ('Choices', RESEED, 0);
+GO
+DELETE FROM Questions;
+DBCC CHECKIDENT ('Questions', RESEED, 0);
+GO
+DELETE FROM Testers;
+DBCC CHECKIDENT ('Testers', RESEED, 0);
+GO
+
+INSERT INTO Questions(Title, TotalScore) VALUES(
+	'Velit adipisicing enim est consectetur voluptate culpa exercitation aliquip deserunt dolor veniam labore. Proident dolore occaecat consequat irure irure.',
+	20
+);
+INSERT INTO Questions(Title, TotalScore) VALUES(
+	'Ut commodo consectetur deserunt pariatur. Nisi ullamco anim ex sunt laborum voluptate eu mollit non qui. Non laboris incididunt Lorem officia ipsum enim id aliquip eu. Occaecat duis cupidatat.',
+	20
+);
+INSERT INTO Questions(Title, TotalScore) VALUES(
+	'Ut voluptate non officia ullamco exercitation dolore laborum proident magna tempor ea. Eu reprehenderit incididunt.',
+	20
+);
+INSERT INTO Questions(Title, TotalScore) VALUES(
+	'In labore esse pariatur sint. Enim Lorem ad reprehenderit culpa cupidatat id qui. Aute culpa nisi eu nisi nostrud voluptate laborum.',
+	20
+);
+INSERT INTO Questions(Title, TotalScore) VALUES(
+	'Excepteur nostrud non eu ex nisi sit sunt in labore exercitation laboris eiusmod. Occaecat culpa excepteur sunt officia pariatur do officia aute amet adipisicing.',
+	20
+);
+GO
+
+
+-- question 1
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'eiusmod et minim ea magna',
+	15,
+	1
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'deserunt proident enim occaecat in',
+	10,
+	1
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'nostrud dolore sint fugiat cupidatat',
+	20,
+	1
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'eu reprehenderit dolor commodo nostrud',
+	5,
+	1
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'ex dolor eu est consectetur',
+	0,
+	1
+);
+
+-- question 2
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'amet reprehenderit sint voluptate consequat',
+	5,
+	2
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'est veniam dolor deserunt dolor',
+	20,
+	2
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'eu deserunt velit incididunt sit',
+	10,
+	2
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'eu occaecat anim consectetur pariatur',
+	10,
+	2
+);
+
+-- question 3
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'elit commodo sit quis nostrud',
+	20,
+	3
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'est veniam dolor deserunt dolor',
+	5,
+	3
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'minim culpa aliqua velit non',
+	0,
+	3
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'eu occaecat anim consectetur pariatur',
+	0,
+	3
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'occaecat officia labore commodo magna',
+	0,
+	3
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'minim culpa aliqua velit non',
+	0,
+	3
+);
+
+-- question 4
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'elit commodo sit quis nostrud',
+	20,
+	4
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'est veniam dolor deserunt dolor',
+	5,
+	4
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'minim culpa aliqua velit non',
+	0,
+	4
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'eiusmod veniam consequat ex ut',
+	10,
+	4
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'occaecat officia labore commodo magna',
+	5,
+	4
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'cupidatat nulla quis est id',
+	20,
+	4
+);
+
+-- question 5
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'elit commodo sit quis nostrud',
+	10,
+	5
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'est veniam dolor deserunt dolor',
+	5,
+	5
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'minim culpa aliqua velit non',
+	20,
+	5
+);
+INSERT INTO Choices(Title, Score, QuestionId) VALUES(
+	'eiusmod veniam consequat ex ut',
+	10,
+	5
+);
+GO
