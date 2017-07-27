@@ -22,7 +22,7 @@ namespace ZQuiz.WebApi.Controllers
         }
 
         /// <summary>
-        /// Save current tester data
+        /// Submit current tester data
         /// </summary>
         // POST: api/submit
         public IHttpActionResult Post([FromBody]TesterEntity tester)
