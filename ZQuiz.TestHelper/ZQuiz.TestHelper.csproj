@@ -60,7 +60,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="GenData\ex-data1.json" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GenData\json-generator-template.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

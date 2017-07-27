@@ -1,0 +1,21 @@
+﻿http://beta.json-generator.com/
+
+
+[
+	{
+		'repeat(10)': {
+			question: {
+				title: '{{lorem(1, "paragraphs")}}',
+				totalScore: 20,
+				choices: [
+					{
+						'repeat(3,6)': {
+							title: '{{lorem(5, "words")}}',
+							score: '{{integer(0, 20)}}'
+						}
+					}
+				]
+			}
+		}
+	}
+]
